@@ -7,19 +7,22 @@ package com.group.libraryapp.calculator
  * 최초 숫자가 기록된 이후에는 연산자 함수를 통해서 계산
  * */
 class Calculator(
-    var number: Int
+    private var _number: Int
 ) {
 
-    fun add(operand: Int) { this.number += operand }
+    val number: Int
+        get() = this._number
 
-    fun minus(operand: Int) { this.number -= operand }
+    fun add(operand: Int) { this._number += operand }
 
-    fun multiply(operand: Int) { this.number *= operand }
+    fun minus(operand: Int) { this._number -= operand }
+
+    fun multiply(operand: Int) { this._number *= operand }
 
     fun divide(operand: Int) {
         if (operand == 0) {
             throw IllegalArgumentException("0으로 나눌 수 없습니다.")
         }
-        this.number /= operand
+        this._number /= operand
     }
 }
