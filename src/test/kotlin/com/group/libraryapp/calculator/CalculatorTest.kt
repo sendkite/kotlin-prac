@@ -8,14 +8,11 @@ fun main() {
 class CalculatorTest {
 
     fun addTest() {
+        // give
         val calculator = Calculator(5)
+        // when
         calculator.add(3)
-        val expectedCalculator = Calculator(8)
-
-//        if (calculator != expectedCalculator) {
-//            throw IllegalArgumentException()
-//        }
-
+        // then
         if (calculator.number != 8) {
             throw IllegalArgumentException()
         }
