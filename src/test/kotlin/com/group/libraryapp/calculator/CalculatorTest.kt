@@ -12,7 +12,11 @@ class CalculatorTest {
         calculator.add(3)
         val expectedCalculator = Calculator(8)
 
-        if (calculator != expectedCalculator) {
+//        if (calculator != expectedCalculator) {
+//            throw IllegalArgumentException()
+//        }
+
+        if (calculator.number != 8) {
             throw IllegalArgumentException()
         }
     }

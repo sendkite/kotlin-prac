@@ -6,8 +6,8 @@ package com.group.libraryapp.calculator
  * 2. 계산기가 생성될 때 숫자를 1개 받는다.
  * 최초 숫자가 기록된 이후에는 연산자 함수를 통해서 계산
  * */
-data class Calculator(
-    private var number: Int
+class Calculator(
+    var number: Int
 ) {
 
     fun add(operand: Int) { this.number += operand }
