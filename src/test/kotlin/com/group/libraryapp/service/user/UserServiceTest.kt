@@ -1,5 +1,6 @@
 package com.group.libraryapp.service.user
 
+
 import com.group.libraryapp.domain.user.User
 import com.group.libraryapp.domain.user.UserRepository
 import com.group.libraryapp.dto.user.request.UserCreateRequest
@@ -40,7 +41,7 @@ class UserServiceTest @Autowired constructor(
         // given
         userRepository.saveAll(listOf(
             User("A", 20),
-            User("B", null)
+            User("B")
         ))
 
         // when
@@ -55,7 +56,7 @@ class UserServiceTest @Autowired constructor(
     fun updateUserNameTest() {
         // given
         val savedUser = userRepository.save(User("A", null))
-        val request = UserUpdateRequest(savedUser.id, "B")
+        val request = UserUpdateRequest(savedUser.id!!, "B")
 
         // when
         userService.updateUserName(request)
@@ -68,7 +69,7 @@ class UserServiceTest @Autowired constructor(
     @Test
     fun deleteUserTest() {
         // given
-        userRepository.save(User("A", null))
+        userRepository.save(User("A"))
 
         // when
         userService.deleteUser("A")
