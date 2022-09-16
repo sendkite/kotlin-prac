@@ -2,13 +2,8 @@ package com.group.libraryapp.domain.user
 
 import com.group.libraryapp.domain.book.Book
 import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory
-import javax.persistence.CascadeType
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.OneToMany
-import javax.persistence.Table
+import com.group.libraryapp.domain.user.loanhistory.UserLoanStatus
+import javax.persistence.*
 
 @Entity
 @Table(name = "users")
@@ -16,6 +11,8 @@ class User(
 
     var name: String,
     val age: Int? = null,
+    @Enumerated(EnumType.STRING)
+    val status: UserStatus,
 
     @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
     val userLoanHistories: MutableList<UserLoanHistory> = mutableListOf(),
@@ -36,12 +33,26 @@ class User(
     }
 
     fun loanBook(book: Book) {
-        this.userLoanHistories.add(UserLoanHistory(this, book.name, false))
+        this.userLoanHistories.add(UserLoanHistory(this, book.name, UserLoanStatus.LOANED))
     }
 
     fun returnBook(bookName: String) {
         this.userLoanHistories
             .first { it -> it.bookName == bookName }
             .doReturn()
+    }
+
+    companion object {
+        fun fixture(
+            name: String = "전송연",
+            age: Int? = null,
+            status: UserStatus = UserStatus.ACTIVE,
+        ): User {
+            return User(
+                name = name,
+                age = age,
+                status = status,
+            )
+        }
     }
 }

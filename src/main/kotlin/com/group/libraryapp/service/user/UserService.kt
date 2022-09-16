@@ -2,12 +2,12 @@ package com.group.libraryapp.service.user
 
 import com.group.libraryapp.domain.user.User
 import com.group.libraryapp.domain.user.UserRepository
+import com.group.libraryapp.domain.user.UserStatus
 import com.group.libraryapp.dto.user.request.UserCreateRequest
 import com.group.libraryapp.dto.user.request.UserUpdateRequest
 import com.group.libraryapp.dto.user.response.UserResponse
 import com.group.libraryapp.util.fail
 import com.group.libraryapp.util.findByIdOrThrow
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -19,7 +19,7 @@ class UserService(
 
     @Transactional
     fun saveUser(request: UserCreateRequest) {
-        userRepository.save(User(request.name, request.age))
+        userRepository.save(User(request.name, request.age, UserStatus.ACTIVE))
     }
 
     @Transactional(readOnly = true)
