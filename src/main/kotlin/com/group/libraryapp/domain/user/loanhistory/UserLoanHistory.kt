@@ -4,7 +4,7 @@ import com.group.libraryapp.domain.user.User
 import javax.persistence.*
 
 @Entity
-class UserLoanHistory(
+class UserLoanHistory constructor(
 
     @ManyToOne
     val user: User,
@@ -18,6 +18,8 @@ class UserLoanHistory(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 ) {
+    val isReturn: Boolean
+        get() = this.status == UserLoanStatus.RETURNED
 
     fun  doReturn() {
         this.status = UserLoanStatus.RETURNED
