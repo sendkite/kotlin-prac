@@ -6,7 +6,7 @@ import com.group.libraryapp.domain.user.loanhistory.UserLoanStatus
 
 data class BookHistoryResponse(
     val name: String,
-    @get: JsonProperty("isReturn")
+    @get: JsonProperty("isReturn") // JSON 필드 이름 직접 지정
     val isReturn: Boolean
 ) {
     companion object {
